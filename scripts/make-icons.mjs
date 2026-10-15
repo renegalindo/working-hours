@@ -9,8 +9,8 @@ const PAPER = [255, 255, 255];
 const SUPERSAMPLE = 4;
 
 // Radii in unit space: a white outline (so the icon reads on dark toolbars), the blue rim, then the face.
-const OUTLINE_R = 0.49;
-const RIM_R = 0.41;
+const OUTLINE_R = 0.5;
+const RIM_R = 0.405;
 const FACE_R = 0.3;
 const HAND_DROP = 0.035;
 
