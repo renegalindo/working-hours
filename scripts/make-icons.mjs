@@ -1,11 +1,10 @@
-// Draws the toolbar icon (a clock whose left half is hatched grey, with a blue rim) as PNGs, with no dependencies.
+// Draws the toolbar icon (a clock with a blue rim) as PNGs, with no dependencies.
 // Run: node scripts/make-icons.mjs
 import { writeFileSync } from "node:fs";
 import { deflateSync } from "node:zlib";
 
 const INK = [51, 51, 51];
 const RIM = [25, 140, 255];
-const HATCH = [150, 150, 150];
 const PAPER = [255, 255, 255];
 const SUPERSAMPLE = 4;
 
@@ -28,15 +27,10 @@ function shade(x, y, size) {
     const t = Math.max(0, Math.min(1, ((x - x1) * (x2 - x1) + (y - y1) * (y2 - y1)) / ((x2 - x1) ** 2 + (y2 - y1) ** 2)));
     return Math.hypot(x - (x1 + t * (x2 - x1)), y - (y1 + t * (y2 - y1))) < width / 2;
   };
-  const handWidth = size <= 16 ? 0.13 : 0.1;
-  if (nearSegment(0.5, 0.5, 0.5, 0.3, handWidth)) return [...INK, 255];
-  if (nearSegment(0.5, 0.5, 0.66, 0.5, handWidth)) return [...INK, 255];
+  const handWidth = size <= 16 ? 0.14 : 0.115;
+  if (nearSegment(0.5, 0.5, 0.5, 0.28, handWidth)) return [...INK, 255];
+  if (nearSegment(0.5, 0.5, 0.68, 0.5, handWidth)) return [...INK, 255];
 
-  if (dx < 0) {
-    const stripes = size <= 16 ? 2 : size <= 32 ? 3 : 5;
-    const phase = ((x + y) * stripes) % 1;
-    if (phase < 0.45) return [...HATCH, 255];
-  }
   return [...PAPER, 255];
 }
 
