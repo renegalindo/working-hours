@@ -1,6 +1,6 @@
 # Working Hours
 
-A tiny Chrome extension that hatches out the hours you're **not** working in Google Calendar, so your real availability stands out at a glance. A free, open-source alternative to Shade Calendar.
+A tiny Chrome extension that hatches out the hours you're **not** working in Google Calendar, so your real availability stands out at a glance.
 
 ![icon](icons/icon128.png)
 
