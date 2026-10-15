@@ -24,7 +24,7 @@ function save() {
 
 function paintSwatch() {
   const isDark = matchMedia("(prefers-color-scheme: dark)").matches;
-  const rgb = isDark ? "232, 234, 237" : "60, 64, 67";
+  const rgb = whShadeRgb(settings.color, isDark);
   const alpha = 0.05 + 0.4 * (settings.intensity / 100);
   document.documentElement.style.setProperty("--stripe", `rgba(${rgb}, ${alpha})`);
 }
@@ -114,6 +114,24 @@ async function init() {
     clearTimeout(intensitySaveTimer);
     intensitySaveTimer = setTimeout(save, 150);
   });
+
+  const colors = document.getElementById("colors");
+  for (const [name, value] of Object.entries(WH_COLORS)) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "color";
+    button.title = name[0].toUpperCase() + name.slice(1);
+    button.setAttribute("aria-label", button.title);
+    button.style.setProperty("--dot", `rgb(${whShadeRgb(name, matchMedia("(prefers-color-scheme: dark)").matches)})`);
+    button.setAttribute("aria-pressed", settings.color === name);
+    button.addEventListener("click", () => {
+      settings.color = name;
+      for (const other of colors.children) other.setAttribute("aria-pressed", other === button);
+      paintSwatch();
+      save();
+    });
+    colors.append(button);
+  }
 
   document.getElementById("copy-monday").addEventListener("click", () => {
     for (const index of [2, 3, 4, 5]) settings.days[index] = { ...settings.days[1] };

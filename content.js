@@ -60,7 +60,7 @@
     const t = settings.intensity / 100;
     const stripe = 0.05 + 0.4 * t;
     const tint = 0.02 + 0.16 * t;
-    const rgb = dark ? "232, 234, 237" : "60, 64, 67";
+    const rgb = whShadeRgb(settings.color, dark);
     return { stripe: `rgba(${rgb}, ${stripe})`, tint: `rgba(${rgb}, ${tint})` };
   }
 
