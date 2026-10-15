@@ -107,7 +107,7 @@ main.paused {
   height: 6px;
   margin: 6px 0;
   border-radius: 3px;
-  background: linear-gradient(to right, var(--accent) var(--fill, 50%), var(--control) var(--fill, 50%));
+  background: linear-gradient(to right, var(--shade, var(--accent)) var(--fill, 50%), var(--control) var(--fill, 50%));
   cursor: pointer;
 }
 .intensity input::-webkit-slider-thumb {
@@ -115,9 +115,9 @@ main.paused {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--shade, var(--accent));
 }
-.intensity input:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.intensity input:focus-visible { outline: 2px solid var(--shade, var(--accent)); outline-offset: 4px; }
 
 /* Days */
 .days {

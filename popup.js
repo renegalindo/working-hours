@@ -98,7 +98,10 @@ async function init() {
     save();
   });
 
-  const paintFill = () => intensity.style.setProperty("--fill", `${intensity.value}%`);
+  const paintFill = () => {
+    intensity.style.setProperty("--fill", `${intensity.value}%`);
+    intensity.style.setProperty("--shade", `rgb(${whShadeRgb(settings.color, true)})`);
+  };
   intensity.value = settings.intensity;
   paintFill();
   intensity.addEventListener("input", () => {
@@ -121,6 +124,7 @@ async function init() {
     button.addEventListener("click", () => {
       settings.color = name;
       for (const other of colors.children) other.setAttribute("aria-pressed", other === button);
+      paintFill();
       save();
     });
     colors.append(button);
