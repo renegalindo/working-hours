@@ -45,18 +45,12 @@ h1 {
 }
 
 main {
-  padding: 0 16px;
+  padding: 0 16px 10px;
   transition: opacity 120ms;
 }
 
 main.paused {
   opacity: 0.45;
-}
-
-footer {
-  padding: 10px 16px 14px;
-  color: var(--muted);
-  font-size: 11px;
 }
 
 /* Master switch */
