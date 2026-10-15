@@ -10,7 +10,6 @@
   --control: #484848;
   --hover: #2a2a2a;
   --accent: #008aff;
-  --stripe: rgba(232, 234, 237, 0.35);
   color-scheme: dark;
 }
 
@@ -82,8 +81,8 @@ main.paused {
 .color-picker .label { display: block; color: var(--label); margin-bottom: 8px; }
 .colors { display: flex; justify-content: space-between; }
 .color {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   padding: 0;
   border: 0;
   border-radius: 50%;
@@ -95,21 +94,11 @@ main.paused {
 
 /* Intensity */
 .intensity {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   padding: 6px 0 12px;
   border-bottom: 1px solid var(--line);
 }
-.intensity label { color: var(--label); }
-.intensity input { flex: 1; accent-color: var(--accent); }
-.swatch {
-  width: 28px;
-  height: 20px;
-  border-radius: 4px;
-  border: 1px solid var(--line);
-  background-image: repeating-linear-gradient(-45deg, var(--stripe) 0 1.5px, transparent 1.5px 7px);
-}
+.intensity label { display: block; color: var(--label); margin-bottom: 4px; }
+.intensity input { display: block; width: 100%; margin: 0; accent-color: var(--accent); }
 
 /* Days */
 .days {

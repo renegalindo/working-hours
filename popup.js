@@ -22,12 +22,6 @@ function save() {
   whSaveSettings(settings);
 }
 
-function paintSwatch() {
-  const rgb = whShadeRgb(settings.color, true); // the popup is always dark
-  const alpha = 0.05 + 0.4 * (settings.intensity / 100);
-  document.documentElement.style.setProperty("--stripe", `rgba(${rgb}, ${alpha})`);
-}
-
 function renderRow(row, day) {
   row.classList.toggle("off", !day.on);
   row.querySelector(".on").checked = day.on;
@@ -105,10 +99,8 @@ async function init() {
   });
 
   intensity.value = settings.intensity;
-  paintSwatch();
   intensity.addEventListener("input", () => {
     settings.intensity = Number(intensity.value);
-    paintSwatch();
     // Debounced: chrome.storage.sync caps writes per minute, and a slider drag fires dozens.
     clearTimeout(intensitySaveTimer);
     intensitySaveTimer = setTimeout(save, 150);
@@ -126,7 +118,6 @@ async function init() {
     button.addEventListener("click", () => {
       settings.color = name;
       for (const other of colors.children) other.setAttribute("aria-pressed", other === button);
-      paintSwatch();
       save();
     });
     colors.append(button);
