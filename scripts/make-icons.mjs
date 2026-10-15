@@ -12,6 +12,7 @@ const SUPERSAMPLE = 4;
 const OUTLINE_R = 0.49;
 const RIM_R = 0.41;
 const FACE_R = 0.3;
+const HAND_DROP = 0.035;
 
 // Returns [r, g, b, a] for a point in unit space (0–1), or null for transparent.
 function shade(x, y, size) {
@@ -28,8 +29,10 @@ function shade(x, y, size) {
     return Math.hypot(x - (x1 + t * (x2 - x1)), y - (y1 + t * (y2 - y1))) < width / 2;
   };
   const handWidth = size <= 16 ? 0.14 : 0.115;
-  if (nearSegment(0.5, 0.5, 0.5, 0.28, handWidth)) return [...INK, 255];
-  if (nearSegment(0.5, 0.5, 0.68, 0.5, handWidth)) return [...INK, 255];
+  // The hands' mass sits above the centre, so nudge the pivot down to look centred.
+  const pivotY = 0.5 + HAND_DROP;
+  if (nearSegment(0.5, pivotY, 0.5, pivotY - 0.22, handWidth)) return [...INK, 255];
+  if (nearSegment(0.5, pivotY, 0.68, pivotY, handWidth)) return [...INK, 255];
 
   return [...PAPER, 255];
 }
