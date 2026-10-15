@@ -1,17 +1,17 @@
-// Draws the toolbar icon (a clock with a blue rim) as PNGs, with no dependencies.
+// Draws the toolbar icon (a clock with a grey rim) as PNGs, with no dependencies.
 // Run: node scripts/make-icons.mjs
 import { writeFileSync } from "node:fs";
 import { deflateSync } from "node:zlib";
 
 const INK = [51, 51, 51];
-const RIM = [25, 140, 255];
+const RIM = [196, 196, 196];
 const PAPER = [255, 255, 255];
 const SUPERSAMPLE = 4;
 
-// Radii in unit space: a white outline (so the icon reads on dark toolbars), the blue rim, then the face.
+// Radii in unit space: a white outline (so the icon reads on dark toolbars), the grey rim, then the face.
 const OUTLINE_R = 0.5;
 const RIM_R = 0.405;
-const FACE_R = 0.3;
+const FACE_R = 0.28;
 // Optical nudge for the hands: one pixel at the 32px (Retina toolbar) size is 1/32.
 const HAND_DROP = 0.035 + 1 / 32;
 const HAND_SHIFT_LEFT = 1 / 32;
