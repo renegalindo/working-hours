@@ -12,7 +12,9 @@ const SUPERSAMPLE = 4;
 const OUTLINE_R = 0.5;
 const RIM_R = 0.405;
 const FACE_R = 0.3;
-const HAND_DROP = 0.035;
+// Optical nudge for the hands: one pixel at the 32px (Retina toolbar) size is 1/32.
+const HAND_DROP = 0.035 + 1 / 32;
+const HAND_SHIFT_LEFT = 1 / 32;
 
 // Returns [r, g, b, a] for a point in unit space (0–1), or null for transparent.
 function shade(x, y, size) {
@@ -30,9 +32,10 @@ function shade(x, y, size) {
   };
   const handWidth = size <= 16 ? 0.14 : 0.115;
   // The hands' mass sits above the centre, so nudge the pivot down to look centred.
+  const pivotX = 0.5 - HAND_SHIFT_LEFT;
   const pivotY = 0.5 + HAND_DROP;
-  if (nearSegment(0.5, pivotY, 0.5, pivotY - 0.22, handWidth)) return [...INK, 255];
-  if (nearSegment(0.5, pivotY, 0.68, pivotY, handWidth)) return [...INK, 255];
+  if (nearSegment(pivotX, pivotY, pivotX, pivotY - 0.22, handWidth)) return [...INK, 255];
+  if (nearSegment(pivotX, pivotY, pivotX + 0.18, pivotY, handWidth)) return [...INK, 255];
 
   return [...PAPER, 255];
 }
