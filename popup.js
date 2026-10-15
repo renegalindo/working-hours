@@ -98,9 +98,12 @@ async function init() {
     save();
   });
 
+  const paintFill = () => intensity.style.setProperty("--fill", `${intensity.value}%`);
   intensity.value = settings.intensity;
+  paintFill();
   intensity.addEventListener("input", () => {
     settings.intensity = Number(intensity.value);
+    paintFill();
     // Debounced: chrome.storage.sync caps writes per minute, and a slider drag fires dozens.
     clearTimeout(intensitySaveTimer);
     intensitySaveTimer = setTimeout(save, 150);

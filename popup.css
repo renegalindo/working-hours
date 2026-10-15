@@ -98,7 +98,26 @@ main.paused {
   border-bottom: 1px solid var(--line);
 }
 .intensity label { display: block; color: var(--label); margin-bottom: 4px; }
-.intensity input { display: block; width: 100%; margin: 0; accent-color: var(--accent); }
+/* Custom-drawn so the empty part of the track has no outline. --fill is set from popup.js. */
+.intensity input {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 6px;
+  margin: 6px 0;
+  border-radius: 3px;
+  background: linear-gradient(to right, var(--accent) var(--fill, 50%), var(--control) var(--fill, 50%));
+  cursor: pointer;
+}
+.intensity input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.intensity input:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
 /* Days */
 .days {
