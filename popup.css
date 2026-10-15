@@ -8,6 +8,9 @@
   --link: #8d8d8d;
   --line: #2a2a2a;
   --control: #484848;
+  --help: #8c8c8c;
+  --tip-bg: #383838;
+  --tip-fg: #c4c4c4;
   --hover: #2a2a2a;
   --accent: #008aff;
   color-scheme: dark;
@@ -48,6 +51,42 @@ main {
 main.paused {
   opacity: 0.45;
 }
+
+/* Title help + tooltip */
+.title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.help {
+  display: flex;
+  color: var(--help);
+  cursor: help;
+  outline: none;
+}
+.help:hover,
+.help:focus-visible { color: var(--tip-fg); }
+.tip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 10;
+  width: 240px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--tip-bg);
+  color: var(--tip-fg);
+  font-size: 12px;
+  line-height: 1.45;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 120ms, visibility 120ms;
+  pointer-events: none;
+}
+.help:hover .tip,
+.help:focus-visible .tip { opacity: 1; visibility: visible; }
 
 /* Master switch */
 .switch input { position: absolute; opacity: 0; }
