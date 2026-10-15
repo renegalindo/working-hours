@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Working Hours</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>Working Hours</h1>
+    <label class="switch" title="Shade non-working hours (Alt+Shift+W)">
+      <input type="checkbox" id="enabled">
+      <span class="track"><span class="thumb"></span></span>
+    </label>
+  </header>
+
+  <main id="panel">
+    <section class="intensity">
+      <label for="intensity">Shade</label>
+      <input type="range" id="intensity" min="0" max="100" step="5">
+      <span class="swatch" id="swatch" aria-hidden="true"></span>
+    </section>
+
+    <ol class="days" id="days"></ol>
+
+    <button type="button" class="link" id="copy-monday">Copy Monday to Tue–Fri</button>
+  </main>
+
+  <footer>Changes apply instantly in Google Calendar.</footer>
+
+  <template id="day-row">
+    <li class="day">
+      <label class="day-toggle">
+        <input type="checkbox" class="on">
+        <span class="name"></span>
+      </label>
+      <select class="start" aria-label="Start"></select>
+      <span class="dash">–</span>
+      <select class="end" aria-label="End"></select>
+      <span class="off-label">Off</span>
+    </li>
+  </template>
+
+  <script src="shared.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

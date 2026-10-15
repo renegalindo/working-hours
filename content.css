@@ -1,0 +1,18 @@
+/* Sits behind events (it's the first child of each day column), never catches clicks. */
+.wh-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.wh-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: var(--wh-tint);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--wh-stripe) 0 1.5px,
+    transparent 1.5px 7px
+  );
+}
