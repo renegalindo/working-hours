@@ -6,7 +6,7 @@ A tiny Chrome extension that hatches out the hours you're **not** working in Goo
 
 ## Features
 
-- Per-day working hours in 15-minute steps; mark any day as off.
+- Per-day working hours on the hour or half hour; mark any day as off.
 - Hatched shading on the Day, Week and custom-day views. Events stay crisp on top.
 - Intensity slider, light and dark theme aware.
 - Follows whatever timezone Calendar is displaying.

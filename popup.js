@@ -1,6 +1,6 @@
 // Rows run Monday → Sunday; storage is indexed Sunday = 0, like Date#getDay().
 const DISPLAY_ORDER = [1, 2, 3, 4, 5, 6, 0];
-const STEP = 15;
+const STEP = 30;
 const DAY_NAMES = Array.from({ length: 7 }, (_, i) =>
   new Date(2024, 0, 7 + i).toLocaleDateString(undefined, { weekday: "long" }),
 );
@@ -84,6 +84,14 @@ function renderAll() {
 
 async function init() {
   settings = await whLoadSettings();
+  // Snap any times saved under an older, finer step onto the current one.
+  const snap = (m) => Math.round(m / STEP) * STEP;
+  const before = JSON.stringify(settings.days);
+  for (const day of settings.days) {
+    day.start = Math.min(snap(day.start), 1440 - STEP);
+    day.end = Math.max(snap(day.end), day.start + STEP);
+  }
+  if (JSON.stringify(settings.days) !== before) save();
 
   const enabled = document.getElementById("enabled");
   const panel = document.getElementById("panel");
