@@ -23,8 +23,7 @@ function save() {
 }
 
 function paintSwatch() {
-  const isDark = matchMedia("(prefers-color-scheme: dark)").matches;
-  const rgb = whShadeRgb(settings.color, isDark);
+  const rgb = whShadeRgb(settings.color, true); // the popup is always dark
   const alpha = 0.05 + 0.4 * (settings.intensity / 100);
   document.documentElement.style.setProperty("--stripe", `rgba(${rgb}, ${alpha})`);
 }
@@ -122,7 +121,7 @@ async function init() {
     button.className = "color";
     button.title = name[0].toUpperCase() + name.slice(1);
     button.setAttribute("aria-label", button.title);
-    button.style.setProperty("--dot", `rgb(${whShadeRgb(name, matchMedia("(prefers-color-scheme: dark)").matches)})`);
+    button.style.setProperty("--dot", `rgb(${whShadeRgb(name, true)})`);
     button.setAttribute("aria-pressed", settings.color === name);
     button.addEventListener("click", () => {
       settings.color = name;

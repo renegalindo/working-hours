@@ -20,13 +20,13 @@ const WH_DEFAULTS = {
 // Shade colors as "r, g, b". Neutral adapts to the theme; the rest are the same in both.
 const WH_COLORS = {
   neutral: { light: "60, 64, 67", dark: "232, 234, 237" },
-  purple: "110, 91, 242",
-  blue: "59, 130, 246",
-  teal: "76, 195, 207",
-  green: "92, 196, 106",
-  yellow: "247, 201, 72",
-  orange: "242, 153, 74",
-  red: "235, 87, 87",
+  purple: "97, 85, 245",
+  blue: "0, 136, 255",
+  teal: "3, 195, 207",
+  green: "53, 199, 89",
+  yellow: "255, 204, 2",
+  orange: "255, 141, 41",
+  red: "255, 57, 60",
 };
 
 function whShadeRgb(color, dark) {
