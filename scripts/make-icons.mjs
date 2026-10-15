@@ -1,17 +1,18 @@
-// Draws the toolbar icon (a clock whose left half is hatched grey) as PNGs, with no dependencies.
+// Draws the toolbar icon (a clock whose left half is hatched grey, with a blue rim) as PNGs, with no dependencies.
 // Run: node scripts/make-icons.mjs
 import { writeFileSync } from "node:fs";
 import { deflateSync } from "node:zlib";
 
-const INK = [32, 33, 36];
+const INK = [51, 51, 51];
+const RIM = [25, 140, 255];
 const HATCH = [150, 150, 150];
 const PAPER = [255, 255, 255];
 const SUPERSAMPLE = 4;
 
-// Radii in unit space: a white outline (so the icon reads on dark toolbars), the dark rim, then the face.
+// Radii in unit space: a white outline (so the icon reads on dark toolbars), the blue rim, then the face.
 const OUTLINE_R = 0.49;
-const RIM_R = 0.44;
-const FACE_R = 0.36;
+const RIM_R = 0.41;
+const FACE_R = 0.3;
 
 // Returns [r, g, b, a] for a point in unit space (0–1), or null for transparent.
 function shade(x, y, size) {
@@ -20,19 +21,19 @@ function shade(x, y, size) {
   const r = Math.hypot(dx, dy);
   if (r > OUTLINE_R) return null;
   if (r > RIM_R) return [...PAPER, 255];
-  if (r > FACE_R) return [...INK, 255];
+  if (r > FACE_R) return [...RIM, 255];
 
   // Distance to a segment; comparing it to half the width gives a hand with rounded ends.
   const nearSegment = (x1, y1, x2, y2, width) => {
     const t = Math.max(0, Math.min(1, ((x - x1) * (x2 - x1) + (y - y1) * (y2 - y1)) / ((x2 - x1) ** 2 + (y2 - y1) ** 2)));
     return Math.hypot(x - (x1 + t * (x2 - x1)), y - (y1 + t * (y2 - y1))) < width / 2;
   };
-  const handWidth = size <= 16 ? 0.14 : 0.11;
-  if (nearSegment(0.5, 0.5, 0.5, 0.25, handWidth)) return [...INK, 255];
-  if (nearSegment(0.5, 0.5, 0.69, 0.5, handWidth)) return [...INK, 255];
+  const handWidth = size <= 16 ? 0.13 : 0.1;
+  if (nearSegment(0.5, 0.5, 0.5, 0.3, handWidth)) return [...INK, 255];
+  if (nearSegment(0.5, 0.5, 0.66, 0.5, handWidth)) return [...INK, 255];
 
   if (dx < 0) {
-    const stripes = size <= 16 ? 3 : size <= 32 ? 4 : 6;
+    const stripes = size <= 16 ? 2 : size <= 32 ? 3 : 5;
     const phase = ((x + y) * stripes) % 1;
     if (phase < 0.45) return [...HATCH, 255];
   }
