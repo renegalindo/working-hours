@@ -113,6 +113,7 @@ main.paused {
   grid-template-columns: 1fr auto auto auto;
   align-items: center;
   gap: 6px;
+  min-height: 34px;
   padding: 4px 0;
 }
 
@@ -155,17 +156,9 @@ option { background: var(--bg); }
 
 .dash { color: var(--muted); }
 
-.off-label {
-  display: none;
-  grid-column: 2 / -1;
-  color: var(--muted);
-  justify-self: end;
-}
-
 .day.off .name { color: var(--muted); }
 .day.off select,
 .day.off .dash { display: none; }
-.day.off .off-label { display: block; }
 
 .link {
   border: 0;
