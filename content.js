@@ -122,9 +122,21 @@
     scheduleRender();
   }
 
+  // A theme switch restyles the page without touching the grid: it flips a class or attribute
+  // on <html> or <body>, or swaps a stylesheet in <head>. Render again a beat later too, in
+  // case the background colour is still transitioning when the first render reads it.
+  function scheduleThemeRender() {
+    scheduleRender();
+    setTimeout(scheduleRender, 500);
+  }
+
   chrome.storage.onChanged.addListener(reloadSettings);
   new MutationObserver(scheduleRender).observe(document.body, { childList: true, subtree: true });
+  const themeObserver = new MutationObserver(scheduleThemeRender);
+  themeObserver.observe(document.documentElement, { attributes: true });
+  themeObserver.observe(document.body, { attributes: true });
+  themeObserver.observe(document.head, { childList: true, subtree: true, characterData: true });
   window.addEventListener("resize", scheduleRender);
-  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", scheduleRender);
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", scheduleThemeRender);
   reloadSettings();
 })();
