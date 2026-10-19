@@ -32,7 +32,7 @@ Google Calendar tags each day column of its time grid with an internal date key.
 
 ## Development
 
-Plain JavaScript, no build step. Icons are generated with `node scripts/make-icons.mjs`.
+Plain JavaScript, no build step. Icons, including the padded Web Store icon in `store/`, are generated with `node scripts/make-icons.mjs`. `sh scripts/package.sh` zips the runtime files for a store upload; bump `version` in `manifest.json` first.
 
 ## License
 

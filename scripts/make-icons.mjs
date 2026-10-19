@@ -17,6 +17,8 @@ const SUPERSAMPLE = 8;
 // Geometry is in a 100-unit square. The face sits a little high; the base below it holds the card slot.
 // The body spans 4–96, and the PNG crops to exactly that so the icon fills its toolbar slot edge to edge.
 const VIEW = { from: 4, span: 92 };
+// The Web Store wants 96px of artwork centred in a 128px canvas, so its view widens by a third.
+const STORE_VIEW = { from: 50 - (92 * 128) / 96 / 2, span: (92 * 128) / 96 };
 const FACE = { x: 18, y: 18, w: 64, h: 58, r: 10 };
 const SLOT_BOX = { x: 28, y: 84.5, w: 44 };
 // The face's shaded top edge makes its centre look low, so the dial drops one 32px pixel to match.
@@ -115,7 +117,7 @@ function shade(x, y, spec) {
   return out;
 }
 
-function renderPixels(size) {
+function renderPixels(size, view) {
   const spec = specFor(size);
   const data = Buffer.alloc(size * (size * 4 + 1));
   for (let py = 0; py < size; py++) {
@@ -126,8 +128,8 @@ function renderPixels(size) {
       for (let sy = 0; sy < SUPERSAMPLE; sy++) {
         for (let sx = 0; sx < SUPERSAMPLE; sx++) {
           const c = shade(
-            VIEW.from + ((px + (sx + 0.5) / SUPERSAMPLE) / size) * VIEW.span,
-            VIEW.from + ((py + (sy + 0.5) / SUPERSAMPLE) / size) * VIEW.span,
+            view.from + ((px + (sx + 0.5) / SUPERSAMPLE) / size) * view.span,
+            view.from + ((py + (sy + 0.5) / SUPERSAMPLE) / size) * view.span,
             spec,
           );
           r += c[0]; g += c[1]; b += c[2]; a += c[3];
@@ -165,7 +167,7 @@ function chunk(type, body) {
   return Buffer.concat([length, typed, crc]);
 }
 
-function png(size) {
+function png(size, view = VIEW) {
   const header = Buffer.alloc(13);
   header.writeUInt32BE(size, 0);
   header.writeUInt32BE(size, 4);
@@ -174,7 +176,7 @@ function png(size) {
   return Buffer.concat([
     Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
     chunk("IHDR", header),
-    chunk("IDAT", deflateSync(renderPixels(size))),
+    chunk("IDAT", deflateSync(renderPixels(size, view))),
     chunk("IEND", Buffer.alloc(0)),
   ]);
 }
@@ -182,4 +184,5 @@ function png(size) {
 for (const size of [16, 32, 48, 128]) {
   writeFileSync(new URL(`../icons/icon${size}.png`, import.meta.url), png(size));
 }
-console.log("Icons written to icons/");
+writeFileSync(new URL("../store/icon128.png", import.meta.url), png(128, STORE_VIEW));
+console.log("Icons written to icons/ and store/");
