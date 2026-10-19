@@ -18,16 +18,17 @@ const WH_DEFAULTS = {
   ],
 };
 
-// Shade colors as "r, g, b". Neutral adapts to the theme; the rest are the same in both.
+// Shade colors as "r, g, b". Neutral adapts to the theme; the rest are the same in both
+// and use Google Calendar's own event colors (named in the comments).
 const WH_COLORS = {
   neutral: { light: "60, 64, 67", dark: "232, 234, 237" },
-  purple: "97, 85, 245",
-  blue: "0, 136, 255",
-  teal: "3, 195, 207",
-  green: "53, 199, 89",
-  yellow: "255, 204, 2",
-  orange: "255, 141, 41",
-  red: "255, 57, 60",
+  purple: "63, 81, 181", // Blueberry
+  blue: "66, 133, 244", // Cobalt
+  teal: "0, 150, 136", // Eucalyptus
+  green: "51, 182, 121", // Sage
+  yellow: "246, 191, 38", // Banana
+  orange: "240, 147, 0", // Mango
+  red: "213, 0, 0", // Tomato
 };
 
 // Shade patterns in picker order. Keys match the [data-pattern] rules in content.css and popup.css.
