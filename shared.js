@@ -5,6 +5,7 @@ const WH_DEFAULTS = {
   enabled: true,
   intensity: 50, // 0–100
   color: "neutral", // "neutral" or a key of WH_COLORS
+  pattern: "lines", // a key of WH_PATTERNS
   // Indexed like Date#getDay(): 0 = Sunday … 6 = Saturday. Times are minutes from midnight.
   days: [
     { on: false, start: 540, end: 1020 },
@@ -28,6 +29,19 @@ const WH_COLORS = {
   orange: "255, 141, 41",
   red: "255, 57, 60",
 };
+
+// Shade patterns in picker order. Keys match the [data-pattern] rules in content.css and popup.css.
+const WH_PATTERNS = {
+  lines: "Lines",
+  dots: "Dots",
+  waves: "Waves",
+  stars: "Night sky",
+  solid: "Solid",
+};
+
+function whPattern(pattern) {
+  return pattern in WH_PATTERNS ? pattern : WH_DEFAULTS.pattern;
+}
 
 function whShadeRgb(color, dark) {
   const entry = WH_COLORS[color] ?? WH_COLORS.neutral;

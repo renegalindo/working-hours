@@ -75,6 +75,66 @@ function renderAll() {
   }
 }
 
+const CHECK_ICON =
+  '<svg class="check" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 8.5l2.5 2.5L12 5.5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+function buildPatternPicker() {
+  const button = document.getElementById("pattern");
+  const menu = document.getElementById("pattern-menu");
+
+  const options = Object.entries(WH_PATTERNS).map(([key, name]) => {
+    const option = document.createElement("button");
+    option.type = "button";
+    option.className = "pattern-option";
+    option.setAttribute("role", "option");
+    option.dataset.pattern = key;
+    option.innerHTML = `<span class="swatch" data-pattern="${key}"></span>${name}${CHECK_ICON}`;
+    option.addEventListener("click", () => {
+      settings.pattern = key;
+      paint();
+      setOpen(false);
+      button.focus();
+      save();
+    });
+    option.addEventListener("mouseenter", () => option.focus());
+    return option;
+  });
+  menu.append(...options);
+
+  function paint() {
+    const current = whPattern(settings.pattern);
+    button.dataset.pattern = current;
+    button.title = `Pattern: ${WH_PATTERNS[current]}`;
+    button.setAttribute("aria-label", button.title);
+    for (const option of options) option.setAttribute("aria-selected", option.dataset.pattern === current);
+  }
+
+  function setOpen(open) {
+    menu.hidden = !open;
+    button.setAttribute("aria-expanded", open);
+    if (open) options.find((o) => o.getAttribute("aria-selected") === "true").focus({ preventScroll: true });
+  }
+
+  button.addEventListener("click", () => setOpen(menu.hidden));
+  menu.addEventListener("keydown", (e) => {
+    const index = options.indexOf(document.activeElement);
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      const step = e.key === "ArrowDown" ? 1 : -1;
+      options[(index + step + options.length) % options.length].focus();
+    } else if (e.key === "Escape" || e.key === "Tab") {
+      e.preventDefault();
+      setOpen(false);
+      button.focus();
+    }
+  });
+  document.addEventListener("click", (e) => {
+    if (!menu.hidden && !e.target.closest(".pattern-picker")) setOpen(false);
+  });
+
+  paint();
+}
+
 async function init() {
   settings = await whLoadSettings();
   // Snap any times saved under an older, finer step onto the current one.
@@ -101,6 +161,7 @@ async function init() {
   const paintFill = () => {
     intensity.style.setProperty("--fill", `${intensity.value}%`);
     intensity.style.setProperty("--shade", `rgb(${whShadeRgb(settings.color, true)})`);
+    document.body.style.setProperty("--shade-rgb", whShadeRgb(settings.color, true));
   };
   intensity.value = settings.intensity;
   paintFill();
@@ -129,6 +190,8 @@ async function init() {
     });
     colors.append(button);
   }
+
+  buildPatternPicker();
 
   document.getElementById("copy-monday").addEventListener("click", () => {
     const { start, end } = settings.days[1];

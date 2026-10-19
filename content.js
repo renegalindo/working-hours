@@ -60,8 +60,13 @@
     const t = settings.intensity / 100;
     const stripe = 0.05 + 0.4 * t;
     const tint = 0.02 + 0.16 * t;
+    const spark = 0.1 + 0.8 * t; // Night sky's marks are sparse, so they need more opacity.
     const rgb = whShadeRgb(settings.color, dark);
-    return { stripe: `rgba(${rgb}, ${stripe})`, tint: `rgba(${rgb}, ${tint})` };
+    return {
+      stripe: `rgba(${rgb}, ${stripe})`,
+      tint: `rgba(${rgb}, ${tint})`,
+      spark: `rgba(${rgb}, ${spark})`,
+    };
   }
 
   function render() {
@@ -77,7 +82,8 @@
 
       const ranges = offHoursFor(date);
       const palette = paletteFor(isDarkBackground(column));
-      const signature = JSON.stringify([ranges, palette]);
+      const pattern = whPattern(settings.pattern);
+      const signature = JSON.stringify([ranges, palette, pattern]);
 
       let layer = column.querySelector(`:scope > .${LAYER_CLASS}`);
       if (!layer) {
@@ -92,6 +98,8 @@
       layer.dataset.signature = signature;
       layer.style.setProperty("--wh-stripe", palette.stripe);
       layer.style.setProperty("--wh-tint", palette.tint);
+      layer.style.setProperty("--wh-spark", palette.spark);
+      layer.dataset.pattern = pattern;
       layer.replaceChildren(
         ...ranges.map(([from, to]) => {
           const band = document.createElement("div");

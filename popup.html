@@ -32,7 +32,13 @@
 
     <section class="intensity">
       <label for="intensity">Shade</label>
-      <input type="range" id="intensity" min="0" max="100" step="5">
+      <div class="shade-row">
+        <input type="range" id="intensity" min="0" max="100" step="5">
+        <div class="pattern-picker">
+          <button type="button" class="swatch" id="pattern" aria-haspopup="listbox" aria-expanded="false"></button>
+          <div class="pattern-menu" id="pattern-menu" role="listbox" aria-label="Pattern" hidden></div>
+        </div>
+      </div>
     </section>
 
     <ol class="days" id="days"></ol>
