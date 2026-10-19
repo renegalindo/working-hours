@@ -21,10 +21,11 @@
 
 /* Patterns. The layer's data-pattern is set from settings.pattern in content.js. */
 .wh-layer[data-pattern="lines"] .wh-band {
+  /* Matches the stripes Calendar itself draws over unavailable time: 2.5px on, 2.5px off. */
   background-image: repeating-linear-gradient(
     -45deg,
-    var(--wh-stripe) 0 1.5px,
-    transparent 1.5px 7px
+    var(--wh-stripe) 0 2.5px,
+    transparent 2.5px 5px
   );
 }
 
