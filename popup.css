@@ -185,10 +185,10 @@ main.paused {
   position: absolute;
   inset: 0;
 }
-/* Lines and Waves are drawn as a few whole marks, centred, so nothing is clipped at the edges. */
+/* Lines and Waves are drawn as three centred marks, so no slivers get clipped at the corners. */
 .swatch[data-pattern="lines"]::before {
   background: var(--mark);
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M4.5 9.5 9.5 4.5M4.5 15.5 15.5 4.5M10.5 15.5 15.5 10.5'/%3E%3C/svg%3E") center / 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.6'%3E%3Cpath d='M-1 13.5 13.5-1M-1 21 21-1M6.5 21 21 6.5'/%3E%3C/svg%3E") center / 100% no-repeat;
 }
 /* Inset to exactly 3 × 3 tiles, so the grid sits centred with no clipped dots at the edges. */
 .swatch[data-pattern="dots"]::before {
@@ -198,7 +198,7 @@ main.paused {
 }
 .swatch[data-pattern="waves"]::before {
   background: var(--mark);
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M4 6q1.5-2.5 3 0t3 0 3 0 3 0M4 10q1.5-2.5 3 0t3 0 3 0 3 0M4 14q1.5-2.5 3 0t3 0 3 0 3 0'/%3E%3C/svg%3E") center / 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.4'%3E%3Cpath d='M0 5q2.5-2.5 5 0t5 0 5 0 5 0M0 10q2.5-2.5 5 0t5 0 5 0 5 0M0 15q2.5-2.5 5 0t5 0 5 0 5 0'/%3E%3C/svg%3E") center / 100% no-repeat;
 }
 .swatch[data-pattern="solid"] { background-color: rgba(var(--shade-rgb), 0.6); }
 
