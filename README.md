@@ -8,7 +8,7 @@ A tiny Chrome extension that hatches out the hours you're **not** working in Goo
 
 - Per-day working hours on the hour or half hour; mark any day as off.
 - Hatched shading on the Day, Week and custom-day views. Events stay crisp on top.
-- Pick a shade color, intensity and pattern (lines, dots, waves, night sky or solid); neutral grey adapts to light and dark themes.
+- Pick a shade color, intensity and pattern (lines, dots, waves or solid); neutral grey adapts to light and dark themes.
 - Follows whatever timezone Calendar is displaying.
 - On/off switch in the popup or **Alt+Shift+W**; the toolbar badge shows `OFF` while paused.
 - Settings sync across your Chrome installs.

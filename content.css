@@ -12,7 +12,7 @@
   background-color: var(--wh-tint);
 }
 
-/* Mask-based patterns paint their marks on this layer. */
+/* Waves paints its marks on this layer, through a mask. */
 .wh-band::before {
   content: "";
   position: absolute;
@@ -36,11 +36,6 @@
 .wh-layer[data-pattern="waves"] .wh-band::before {
   background: var(--wh-stripe);
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8'%3E%3Cpath d='M0 4 Q4 0 8 4 T16 4' fill='none' stroke='black' stroke-width='1.3'/%3E%3C/svg%3E");
-}
-
-.wh-layer[data-pattern="stars"] .wh-band::before {
-  background: var(--wh-spark);
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M9 6 l1 2.4 2.4 1-2.4 1-1 2.4-1-2.4-2.4-1 2.4-1z'/%3E%3Ccircle cx='30' cy='12' r='.9'/%3E%3Ccircle cx='22' cy='26' r='1.2'/%3E%3Cpath d='M32 27 l.7 1.6 1.6.7-1.6.7-.7 1.6-.7-1.6-1.6-.7 1.6-.7z'/%3E%3Ccircle cx='6' cy='32' r='.8'/%3E%3Ccircle cx='17' cy='15' r='.6'/%3E%3C/svg%3E");
 }
 
 .wh-layer[data-pattern="solid"] .wh-band {

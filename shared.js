@@ -35,7 +35,6 @@ const WH_PATTERNS = {
   lines: "Lines",
   dots: "Dots",
   waves: "Waves",
-  stars: "Night sky",
   solid: "Solid",
 };
 
