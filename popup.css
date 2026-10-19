@@ -167,12 +167,12 @@ main.paused {
 
 /* Pattern picker. --shade-rgb is set from popup.js. */
 .pattern-picker { position: relative; display: flex; }
-/* Thumbnails are drawn bolder than the calendar shading so they read at 18px. */
+/* Thumbnails are drawn bolder than the calendar shading so they read at 20px. */
 .swatch {
   position: relative;
   flex: none;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   padding: 0;
   border: 0;
   border-radius: 4px;
@@ -190,7 +190,7 @@ main.paused {
 }
 /* Inset to exactly 3 × 3 tiles, so the grid sits centred with no clipped dots at the edges. */
 .swatch[data-pattern="dots"]::before {
-  inset: 1.5px;
+  inset: 2.5px;
   background-image: radial-gradient(circle, var(--mark) 1.1px, transparent 1.5px);
   background-size: 5px 5px;
 }
