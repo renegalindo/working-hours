@@ -188,10 +188,11 @@ main.paused {
 .swatch[data-pattern="lines"]::before {
   background-image: repeating-linear-gradient(-45deg, var(--mark) 0 1.5px, transparent 1.5px 5px);
 }
+/* Inset to exactly 3 × 3 tiles, so the grid sits centred with no clipped dots at the edges. */
 .swatch[data-pattern="dots"]::before {
+  inset: 1.5px;
   background-image: radial-gradient(circle, var(--mark) 1.1px, transparent 1.5px);
   background-size: 5px 5px;
-  background-position: 1px 1px;
 }
 .swatch[data-pattern="waves"]::before {
   background: var(--mark);
