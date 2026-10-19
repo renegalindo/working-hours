@@ -24,7 +24,7 @@ To update: pull or re-download, then hit the reload icon on the extension's card
 
 ## Privacy
 
-No network requests, no analytics, no Google sign-in. The extension only runs on `calendar.google.com` and stores your schedule in Chrome's own synced storage.
+No network requests, no analytics, no Google sign-in. The extension only runs on `calendar.google.com` and stores your schedule in Chrome's own synced storage. Full details are in the [privacy policy](PRIVACY.md).
 
 ## How it works
 
