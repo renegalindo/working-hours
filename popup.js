@@ -131,7 +131,10 @@ async function init() {
   }
 
   document.getElementById("copy-monday").addEventListener("click", () => {
-    for (const index of [0, 2, 3, 4, 5, 6]) settings.days[index] = { ...settings.days[1] };
+    const { start, end } = settings.days[1];
+    for (const index of [0, 2, 3, 4, 5, 6]) {
+      if (settings.days[index].on) settings.days[index] = { ...settings.days[index], start, end };
+    }
     renderAll();
     save();
   });
