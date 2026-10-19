@@ -242,8 +242,7 @@ main.paused {
 .days {
   list-style: none;
   margin: 0;
-  padding: 7px 0;
-  border-bottom: 1px solid var(--line);
+  padding: 7px 0 0;
 }
 
 .day {
@@ -298,12 +297,41 @@ option { background: var(--bg); }
 .day.off select,
 .day.off .dash { display: none; }
 
-.link {
-  border: 0;
+/* A barely-there outline button, so the bulk action stays out of the way. */
+.ghost {
+  margin: 6px 0 12px;
+  padding: 3px 9px;
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
   background: none;
-  padding: 9px 0 7px;
-  color: var(--link);
+  color: var(--muted);
   font: inherit;
+  font-size: 12px;
   cursor: pointer;
 }
-.link:hover { color: var(--value); }
+.ghost:hover {
+  border-color: var(--control);
+  color: var(--value);
+}
+
+/* Footer: tip link and version, below the last divider. */
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 16px;
+  padding: 9px 0 12px;
+  border-top: 1px solid var(--line);
+}
+.version {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.coffee {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--link);
+  text-decoration: none;
+}
+.coffee:hover { color: var(--value); }

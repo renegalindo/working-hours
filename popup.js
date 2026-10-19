@@ -193,13 +193,31 @@ async function init() {
 
   buildPatternPicker();
 
-  document.getElementById("copy-monday").addEventListener("click", () => {
+  document.getElementById("version").textContent = `v${chrome.runtime.getManifest().version}`;
+
+  const copyMonday = document.getElementById("copy-monday");
+  const copyLabel = copyMonday.textContent;
+  let copiedTimer;
+  copyMonday.addEventListener("click", () => {
     const { start, end } = settings.days[1];
+    let changed = false;
     for (const index of [0, 2, 3, 4, 5, 6]) {
-      if (settings.days[index].on) settings.days[index] = { ...settings.days[index], start, end };
+      const day = settings.days[index];
+      if (!day.on || (day.start === start && day.end === end)) continue;
+      settings.days[index] = { ...day, start, end };
+      changed = true;
     }
+    // Only confirm when something actually changed; the width is held so the button doesn't shrink.
+    if (!changed) return;
     renderAll();
     save();
+    copyMonday.style.width = `${copyMonday.offsetWidth}px`;
+    copyMonday.textContent = "Copied to all";
+    clearTimeout(copiedTimer);
+    copiedTimer = setTimeout(() => {
+      copyMonday.textContent = copyLabel;
+      copyMonday.style.width = "";
+    }, 1500);
   });
 
   buildRows();
